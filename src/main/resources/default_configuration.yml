@@ -1,0 +1,9 @@
+users:
+  max: 10
+  init: 1
+  increase: 1
+behavior:
+  rampUpPeriod: 1
+  loopCount: 1
+  timers: 1
+
