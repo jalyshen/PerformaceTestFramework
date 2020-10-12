@@ -1,4 +1,4 @@
-package org.jaly.pft.meterdata;
+package org.jaly.pft.conf;
 
 /**
  * 配置信息对象
@@ -6,6 +6,7 @@ package org.jaly.pft.meterdata;
  * snakeyaml这个包破坏了OO的封装，
  * 只能暂时把Users和Behavior对象变为独立的public class
  *
+ * @author Jaly
  */
 public class Configuration {
     private Users users;

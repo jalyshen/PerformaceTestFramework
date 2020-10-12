@@ -1,7 +1,9 @@
-package org.jaly.pft.meterdata;
+package org.jaly.pft.conf;
 
 /**
  * 线程（用户）相关设置
+ *
+ * @author Jaly
  */
 public class Users {
     /**

@@ -1,13 +1,14 @@
-package org.jaly.pft.meterdata;
+package org.jaly.pft.conf;
 
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.InputStream;
 
 
 /**
  * 框架启动后，读取配置
+ *
+ * @author Jaly
  */
 public class ConfigurationInitialzer {
 

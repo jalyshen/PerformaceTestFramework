@@ -1,7 +1,9 @@
-package org.jaly.pft.meterdata;
+package org.jaly.pft.conf;
 
 /**
  * 线程（Test case）执行过程中的行为
+ *
+ * @author Jaly
  */
 public class Behavior {
     /**

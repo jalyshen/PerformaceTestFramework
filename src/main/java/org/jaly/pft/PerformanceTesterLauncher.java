@@ -1,11 +1,11 @@
 package org.jaly.pft;
 
-import org.jaly.pft.meterdata.ConfigurationInitialzer;
+import org.jaly.pft.conf.ConfigurationInitialzer;
 
 /**
  * 整个测试框架的启动器。通过该类开启测试
  *
- * @author jaly
+ * @author Jaly
  */
 public class PerformanceTesterLauncher {
 
