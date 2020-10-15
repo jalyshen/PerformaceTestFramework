@@ -7,7 +7,7 @@ package org.jaly.pft.conf;
  */
 public class ThreadGroup {
     /**
-     * 设置同时请求的最大用户数量
+     * 设置同时请求的最大线程（用户）数量
      */
     private int max;
 
