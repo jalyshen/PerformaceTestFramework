@@ -9,22 +9,22 @@ package org.jaly.pft.conf;
  * @author Jaly
  */
 public class Configuration {
-    private ThreadGroup threadGroup;
+    private ThreadGroupConf threadGroupConf;
     private Behavior behavior;
 
     Configuration() {}
 
-    Configuration(ThreadGroup threadGroup, Behavior behavior) {
-        this.threadGroup = threadGroup;
+    Configuration(ThreadGroupConf threadGroupConf, Behavior behavior) {
+        this.threadGroupConf = threadGroupConf;
         this.behavior = behavior;
     }
 
-    public void setUsers(ThreadGroup threadGroup) {
-        this.threadGroup = threadGroup;
+    public void setUsers(ThreadGroupConf threadGroupConf) {
+        this.threadGroupConf = threadGroupConf;
     }
 
-    public ThreadGroup getUsers() {
-        return this.threadGroup;
+    public ThreadGroupConf getUsers() {
+        return this.threadGroupConf;
     }
 
     public void setBehavior(Behavior behavior) {

@@ -1,11 +1,13 @@
 package org.jaly.pft.conf;
 
+import java.util.List;
+
 /**
  * 线程组（用户）相关设置
  *
  * @author Jaly
  */
-public class ThreadGroup {
+public class ThreadGroupConf {
     /**
      * 设置同时请求的最大线程（用户）数量
      */
@@ -21,9 +23,9 @@ public class ThreadGroup {
      */
     private int increase;
 
-    ThreadGroup() {}
+    ThreadGroupConf() {}
 
-    ThreadGroup(int max, int init, int increase) {
+    ThreadGroupConf(int max, int init, int increase) {
         this.max  = max;
         this.init = init;
         this.increase  = increase;

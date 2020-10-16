@@ -43,12 +43,15 @@
 
 * 配置元件
 
-  就是每个“测试用例”包含的各个部分。具体包含如下内容：
+  就是每个“测试用例”包含的各个部分。具体包含如下内容： 
 
   * 请求使用的协议。例如：HTTP, HTTPS, TCP等等
   * 请求发送目的地的URL。这个可以拆分成2部分：
     * Domain_Name  ( Host_Name/IP + Port_Number)，如：shopex.homecredit.cn
+    
     * Request Path，如：/suning/phone/iPhone/11
+    
+      Domain_Name 与 Request Path组合成一个完整的请求URL，或者EndPoint。
   * 请求类型，如：GET，POST，PUT，DELETE等等。如果是TCP，没有这个选项。
   * 请求参数（GET：URL上的参数；POST/Update：Body），设置一段JSON。如果是GET，框架会自动转成K-V的形式，放到URL上；如果是POST等请求类型，会完成的把JSON放到Body里传过去。
 
