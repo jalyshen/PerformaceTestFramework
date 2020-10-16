@@ -22,9 +22,9 @@ public class URLElement extends ConfigurationElement {
 
     public URLElement(String hostName, String port, String path) {
         this();
-        this.hostName = hostName;
-        this.port = port;
-        this.path = path;
+        this.setHostName(hostName);
+        this.setPort(port);
+        this.setPath(path);
     }
 
     /**
@@ -56,5 +56,17 @@ public class URLElement extends ConfigurationElement {
             e.printStackTrace();
         }
         return url;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
