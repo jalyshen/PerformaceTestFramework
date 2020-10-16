@@ -1,4 +1,4 @@
-package org.jaly.pft.domain.entities;
+package org.jaly.pft.domain.entities.elements;
 
 /**
  * 配置元件中的请求协议元件

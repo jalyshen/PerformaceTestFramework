@@ -1,4 +1,4 @@
-package org.jaly.pft.domain.entities;
+package org.jaly.pft.domain.entities.elements;
 
 /**
  * 框架中的"配置元件"概念

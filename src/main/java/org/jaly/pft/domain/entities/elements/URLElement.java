@@ -1,4 +1,4 @@
-package org.jaly.pft.domain.entities;
+package org.jaly.pft.domain.entities.elements;
 
 import java.net.MalformedURLException;
 import java.net.URL;
