@@ -9,10 +9,16 @@ import org.jaly.pft.domain.entities.TestCase;
  *
  * @author Jaly
  */
-public class DefaultHttpTestCase implements TestCase {
+public class DefaultHttpTestCase extends TestCase {
+
+    public DefaultHttpTestCase() {}
+
+    public DefaultHttpTestCase(String testCaseName) {
+        this.setTestCaseName(testCaseName);
+    }
 
     @Override
-    public void run() {
+    public void buidingParameters() {
 
     }
 }

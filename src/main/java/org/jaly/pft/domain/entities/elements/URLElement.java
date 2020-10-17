@@ -12,18 +12,20 @@ public class URLElement extends ConfigurationElement {
 
     private final String URL_SLICER = ":";
 
-    private String hostName;
+    private String host;
     private String port;
+    private String service;
     private String path;
 
     public URLElement() {
         elementType = ElementType.URL;
     }
 
-    public URLElement(String hostName, String port, String path) {
+    public URLElement(String host, String port, String service, String path) {
         this();
-        this.setHostName(hostName);
+        this.setHost(host);
         this.setPort(port);
+        this.setService(service);
         this.setPath(path);
     }
 
@@ -33,14 +35,14 @@ public class URLElement extends ConfigurationElement {
      * @return
      */
     public String getEndPointWithStr() {
-        if (hostName == null || hostName.isEmpty()) {
+        if (host == null || host.isEmpty()) {
             return null; // 或者抛出一场
         }
         //TODO: 这里需要根据Protocol提供默认的port
         if (port == null || port.isEmpty()) {
             return null;
         }
-        return hostName + URL_SLICER + port + path;
+        return host + URL_SLICER + port + path;
     }
 
     /**
@@ -58,8 +60,8 @@ public class URLElement extends ConfigurationElement {
         return url;
     }
 
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public void setPort(String port) {
@@ -68,5 +70,13 @@ public class URLElement extends ConfigurationElement {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
     }
 }

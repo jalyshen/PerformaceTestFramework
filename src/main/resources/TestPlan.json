@@ -1,0 +1,23 @@
+{
+  "commonPart": {
+    "hosts": {
+      "selfService":"localhost",
+      "bart": 9000
+    },
+    "ports": {
+      "selfService": 8080,
+      "bart": 9000
+    },
+    "services": {
+      "selfService": "marketplace",
+      "bart": "bart"
+    }
+  },
+  "apis": {
+    "apiName": "",
+    "protocol": "HTTP",
+    "url": {
+
+    }
+  }
+}

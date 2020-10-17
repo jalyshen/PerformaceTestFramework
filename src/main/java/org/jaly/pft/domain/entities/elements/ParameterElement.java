@@ -26,7 +26,7 @@ public class ParameterElement extends ConfigurationElement {
      *
      * @return
      */
-    public Map<String, String> convertToParameter() {
+    public Map<String, String> convertToUrlParameter() {
         Map<String, String> parameters = new HashMap<>();
         //TOOD: 转化JSON为K-V
         return parameters;
@@ -39,7 +39,7 @@ public class ParameterElement extends ConfigurationElement {
      *   * 如果是GET请求，此内容会变成K-V形式，拼接在URL上
      *   * 如果是POST等请求，会作为BODY的Payload
      */
-    public String getParameterJsonString() {
+    public String getBodyPayload() {
         return parameterJsonString;
     }
 

@@ -26,7 +26,7 @@ public class RequestTypeElement extends ConfigurationElement {
         this.requestType = requestType;
     }
 
-    enum RequestType {
+    public enum RequestType {
         GET, POST, PUT, DELETE;
     }
 }
