@@ -1,7 +1,3 @@
----
-typora-copy-images-to: ./TopStructChartOfFramework.png
----
-
 # 框架的测试目标
 
 框架包含三大部分：
@@ -31,7 +27,7 @@ typora-copy-images-to: ./TopStructChartOfFramework.png
 
 * 系统顶层结构图
 
-  ![TopStructChartOfFramework](TopStructChartOfFramework.png)
+  ![TopStructChartOfFramework](./TopStructChartOfFramework.png)
 
 * 负载构建器结构图
 
