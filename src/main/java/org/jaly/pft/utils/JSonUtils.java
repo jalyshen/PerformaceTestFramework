@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * JSON相关的工具类
  *
@@ -80,7 +81,7 @@ public class JSonUtils {
         Map<String, Map<String, Object>> map =
                 (Map<String, Map<String, Object>>) objectMapper.readValue(jsonString,
                                                                           new TypeReference<Map<String, T>>() {
-        });
+                                                                          });
         Map<String, T> result = new HashMap<String, T>();
         for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
             result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
@@ -110,9 +111,7 @@ public class JSonUtils {
         if (json == null) {
             return null;
         }
-
         List<Object> list = mapper.readValue(json, List.class);
-
         for (Object obj : list) {
             if (obj != null && obj instanceof String) {
                 String str = (String) obj;
@@ -123,7 +122,6 @@ public class JSonUtils {
                 }
             }
         }
-
         return list;
     }
 
@@ -139,14 +137,11 @@ public class JSonUtils {
         if (json == null) {
             return null;
         }
-
         Map<String, Object> map = mapper.readValue(json, Map.class);
-
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object obj = entry.getValue();
             if (obj != null && obj instanceof String) {
                 String str = ((String) obj);
-
                 if (str.startsWith("[")) {
                     List<?> list = json2ListRecursion(str, mapper);
                     map.put(entry.getKey(), list);
@@ -156,7 +151,6 @@ public class JSonUtils {
                 }
             }
         }
-
         return map;
     }
 
