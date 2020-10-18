@@ -1,4 +1,4 @@
-package org.jaly.pft.domain.defaults;
+package org.jaly.pft.domain.tcs;
 
 import org.jaly.pft.domain.entities.TestCase;
 

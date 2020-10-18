@@ -1,6 +1,5 @@
 package org.jaly.pft.conf;
 
-import jdk.internal.util.xml.impl.Input;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;

@@ -5,7 +5,7 @@ import org.jaly.pft.domain.entities.elements.RequestTypeElement.RequestType;
 import java.sql.Timestamp;
 
 /**
- * 事件对象，用于收集测试用例执行时间的对象
+ * 事件对象，用于收集测试用例(API)执行时间的对象
  *
  * 示例：
  *   {
@@ -19,7 +19,7 @@ import java.sql.Timestamp;
  *
  * @author Jaly
  */
-public class BaseEvent {
+public class BaseApiEvent {
     /**
      * 事件发生前的时间戳
      */
@@ -32,16 +32,22 @@ public class BaseEvent {
      * 触发此事件的测试用例
      */
     private String testCaseName;
+
+    /**
+     * 当前测试的API唯一表识
+     */
+    private String apiIdentify;
     /**
      * 触发此事件的方法类型
      */
     private RequestType method;
 
-    public BaseEvent(Timestamp startTime, Timestamp endTime,
-                     String testCaseName, RequestType method) {
+    public BaseApiEvent(Timestamp startTime, Timestamp endTime,
+                        String testCaseName, String apiIdentify, RequestType method) {
         this.endTime = endTime;
         this.startTime = startTime;
         this.testCaseName = testCaseName;
+        this.apiIdentify = apiIdentify;
         this.method = method;
     }
 
@@ -59,5 +65,9 @@ public class BaseEvent {
 
     public RequestType getMethod() {
         return method;
+    }
+
+    public String getApiIdentify() {
+        return apiIdentify;
     }
 }
