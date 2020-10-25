@@ -11,9 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 收集OS及其Box的信息的收集器.
- *
- * 需要根据OS及其发行版本不同做调整，尤其是解析数据方法
+ * Linux的系统信息的收集器.
  *
  * @author Jaly
  */

@@ -29,7 +29,7 @@ public class BaseApiEvent {
      */
     private Timestamp endTime;
     /**
-     * 触发此事件的测试用例
+     * 触发此事件的测试用例名称
      */
     private String testCaseName;
 
@@ -42,13 +42,22 @@ public class BaseApiEvent {
      */
     private RequestType method;
 
+    /**
+     * 测试的结果。一个完整的HTTP Response。
+     * 由于HttpUtil返回的结果都是String，
+     * 因此，需要后续的事件分析器做相应的对象转化
+     */
+    private String testResult;
+
     public BaseApiEvent(Timestamp startTime, Timestamp endTime,
-                        String testCaseName, String apiIdentify, RequestType method) {
+                        String testCaseName, String apiIdentify,
+                        RequestType method, String testResult) {
         this.endTime = endTime;
         this.startTime = startTime;
         this.testCaseName = testCaseName;
         this.apiIdentify = apiIdentify;
         this.method = method;
+        this.setTestResult(testResult);
     }
 
     public Timestamp getStartTime() {
@@ -69,5 +78,13 @@ public class BaseApiEvent {
 
     public String getApiIdentify() {
         return apiIdentify;
+    }
+
+    public String getTestResult() {
+        return testResult;
+    }
+
+    public void setTestResult(String testResult) {
+        this.testResult = testResult;
     }
 }
