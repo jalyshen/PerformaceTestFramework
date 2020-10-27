@@ -18,7 +18,7 @@ public class DefaultHttpTestCase extends TestCaseTemplate {
     }
 
     @Override
-    public void buidingParameters() {
+    public void buildingParameters() {
 
     }
 }

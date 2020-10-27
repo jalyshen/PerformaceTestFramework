@@ -31,19 +31,23 @@ public abstract class TestCaseTemplate implements Runnable, TestCase {
      *    这个情况下，当前方法会修改URL对象；
      * 2. 如果是非GET，则作为一个JSON放到Body中
      *    当前情况下，URL对象不会发生改变，但是会修改Request请求对象
+     *
+     * 这个方法，需要修改TestCaseTemplate的parameters变量
      */
-    public abstract void buidingParameters();
+    public abstract void buildingParameters();
 
     @Override
     public void run() {
-        this.buidingParameters();
+        // 构建输入参数
+        this.buildingParameters();
         String result = null;
         Timestamp beginTime = new Timestamp(System.currentTimeMillis());
         if (RequestType.GET == method.getRequestType()) {
-            result = HttpUtils.doGet(this.getUrl().getEndPointWithStr(),
+            //TODO: 缺少设置URL的参数
+            result = HttpUtils.doGet(this.getUrl().getWholeStrUrl(),
                                             false);
         } else {
-            result = HttpUtils.doPost(this.getUrl().getEndPointWithStr(),
+            result = HttpUtils.doPost(this.getUrl().getWholeStrUrl(),
                              this.getParameters().getBodyPayload(),
                              false);
         }

@@ -17,18 +17,18 @@ import java.net.URL;
 public class HttpUtils {
 
     /**
-     * @param httpurl
+     * @param httpUrl
      * @param needReadResponse
      * @return
      */
-    public static String doGet(String httpurl, boolean needReadResponse) {
+    public static String doGet(String httpUrl, boolean needReadResponse) {
         HttpURLConnection connection = null;
         InputStream is = null;
         BufferedReader br = null;
         String result = null;// 返回结果字符串
         try {
             // 创建远程url连接对象
-            URL url = new URL(httpurl);
+            URL url = new URL(httpUrl);
             // 通过远程url连接对象打开一个连接，强转成httpURLConnection类
             connection = (HttpURLConnection) url.openConnection();
             // 设置连接方式：get
