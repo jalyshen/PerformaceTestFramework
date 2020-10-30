@@ -6,7 +6,6 @@ import org.jaly.pft.domain.entities.elements.RequestTypeElement;
 import org.jaly.pft.domain.entities.elements.URLElement;
 
 /**
- * 这是一个"标签"类。
  * 一个测试用例，可以有返回值，也可以没有返回值。
  * 为了统一这2种测试用例，需要用一个"标签"类
  *

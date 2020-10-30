@@ -9,6 +9,7 @@ import org.jaly.pft.domain.events.BaseApiEvent;
 import org.jaly.pft.utils.HttpUtils;
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 /**
  * 框架中的"测试用例"概念
@@ -19,11 +20,22 @@ import java.sql.Timestamp;
  */
 public abstract class TestCaseTemplate implements Runnable, TestCase {
 
+    // 测试用例名称
     private String testCaseName;
+    // 测试使用的协议类型
     private RequestProtocolElement protocol;
+    // 测试的API
     private URLElement url;
+    // 使用HTTP协议的方法（GET、POST...）
     private RequestTypeElement method;
+    // 输入的参数
     private ParameterElement parameters;
+
+    /**
+     * 这个Map用户存储某个TestCase的输出，
+     * 其他的TestCase使用这里的数据作为输入
+     */
+    private Map<String, Object> middleResponses;
 
     /**
      * 根据每个TestCase自身的情况，构建请求参数。
