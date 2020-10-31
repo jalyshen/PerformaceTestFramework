@@ -1,7 +1,6 @@
 package org.jaly.pft.domain.entities.elements;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +10,7 @@ import java.util.Set;
  *
  * @author Jaly
  */
-public class URLElement extends ConfigurationElement {
+public class URL extends ConfigurationElement {
 
     private final String URL_SLICER = ":";
 
@@ -22,13 +21,13 @@ public class URLElement extends ConfigurationElement {
     /**
      * 一个完整的URL，是URLElement对象对外的参数
      */
-    private URL wholeUrl = null;
+    private java.net.URL wholeUrl = null;
 
-    public URLElement() {
+    public URL() {
         elementType = ElementType.URL;
     }
 
-    public URLElement(String host, String port, String service, String path) {
+    public URL(String host, String port, String service, String path) {
         this();
         /**
          * 如果一个完整的URL是这样的：
@@ -41,7 +40,7 @@ public class URLElement extends ConfigurationElement {
          */
         String file = URL_SLASH + service + URL_SLASH + path;
         try {
-            wholeUrl = new URL(HTTP_PROTOCOL, host, Integer.valueOf(port), file );
+            wholeUrl = new java.net.URL(HTTP_PROTOCOL, host, Integer.valueOf(port), file );
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -53,7 +52,7 @@ public class URLElement extends ConfigurationElement {
      * @param parameters
      * @return
      */
-    public URL appendParameters(Map<String, String> parameters) {
+    public java.net.URL appendParameters(Map<String, String> parameters) {
         StringBuilder file = new StringBuilder("?");
         // 遍历
         Set<String> keys = parameters.keySet();
@@ -68,14 +67,14 @@ public class URLElement extends ConfigurationElement {
             }
         }
         try {
-            wholeUrl = new URL(wholeUrl.toString() + file.toString());
+            wholeUrl = new java.net.URL(wholeUrl.toString() + file.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return wholeUrl;
     }
 
-    public URL getWholeUrl() {
+    public java.net.URL getWholeUrl() {
         return wholeUrl;
     }
 
@@ -90,19 +89,19 @@ public class URLElement extends ConfigurationElement {
      */
     public static void main(String[] args) {
         // 测试普通的URL
-        URLElement urlElement = new URLElement(
+        URL url = new URL(
                 "10.237.134.44",
                 "9000",
                 "marketplace",
                 "productions");
         // 期待： http://10.237.134.44:9000/marketplace/productions
-        System.out.println(urlElement.getWholeStrUrl());
+        System.out.println(url.getWholeStrUrl());
 
         // 追加查询参数： ? name=abc
         Map<String, String> parameters = new HashMap<>();
         parameters.put("name", "abc");
         parameters.put("cuid", "adfafdaf");
-        urlElement.appendParameters(parameters);
-        System.out.println(urlElement.getWholeStrUrl());
+        url.appendParameters(parameters);
+        System.out.println(url.getWholeStrUrl());
     }
 }

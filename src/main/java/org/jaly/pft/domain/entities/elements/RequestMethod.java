@@ -5,15 +5,15 @@ package org.jaly.pft.domain.entities.elements;
  *
  * @author Jaly
  */
-public class RequestTypeElement extends ConfigurationElement {
+public class RequestMethod extends ConfigurationElement {
 
     private RequestType requestType;
 
-    public RequestTypeElement() {
+    public RequestMethod() {
         this.elementType = ElementType.HTTP_TYPE;
     }
 
-    public RequestTypeElement(RequestType requestType) {
+    public RequestMethod(RequestType requestType) {
         this();
         this.setRequestType(requestType);
     }

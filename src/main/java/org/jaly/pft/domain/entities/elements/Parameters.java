@@ -8,15 +8,15 @@ import java.util.Map;
  *
  * @author Jaly
  */
-public class ParameterElement extends ConfigurationElement {
+public class Parameters extends ConfigurationElement {
 
     private String parameterJsonString;
 
-    public ParameterElement() {
+    public Parameters() {
         this.elementType = ElementType.PARAMETER;
     }
 
-    public ParameterElement(String parameterJsonString) {
+    public Parameters(String parameterJsonString) {
         this();
         this.parameterJsonString = parameterJsonString;
     }

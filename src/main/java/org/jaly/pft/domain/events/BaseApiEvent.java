@@ -1,6 +1,6 @@
 package org.jaly.pft.domain.events;
 
-import org.jaly.pft.domain.entities.elements.RequestTypeElement.RequestType;
+import org.jaly.pft.domain.entities.elements.RequestMethod.RequestType;
 
 import java.sql.Timestamp;
 

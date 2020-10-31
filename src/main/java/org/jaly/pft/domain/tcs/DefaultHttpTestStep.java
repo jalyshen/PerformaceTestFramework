@@ -1,6 +1,6 @@
 package org.jaly.pft.domain.tcs;
 
-import org.jaly.pft.domain.entities.TestCaseTemplate;
+import org.jaly.pft.domain.entities.TestStepTemplate;
 
 /**
  * 框架提供一个默认的HTTP的测试用例对象。
@@ -9,12 +9,12 @@ import org.jaly.pft.domain.entities.TestCaseTemplate;
  *
  * @author Jaly
  */
-public class DefaultHttpTestCase extends TestCaseTemplate {
+public class DefaultHttpTestStep extends TestStepTemplate {
 
-    public DefaultHttpTestCase() {}
+    public DefaultHttpTestStep() {}
 
-    public DefaultHttpTestCase(String testCaseName) {
-        this.setTestCaseName(testCaseName);
+    public DefaultHttpTestStep(String testCaseName) {
+        this.setTestStepName(testCaseName);
     }
 
     @Override

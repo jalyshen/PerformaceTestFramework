@@ -84,13 +84,16 @@ public class HttpUtils {
         return result;
     }
 
+    public static String doPost(String httpUrl, String param, boolean needReadResponse) {
+        return doPost(httpUrl, param, needReadResponse, ContentType.APPLICATION_JSON);
+    }
+
     /**
      * @param httpUrl
      * @param param
      * @return
      */
-    public static String doPost(String httpUrl, String param, boolean needReadResponse) {
-
+    public static String doPost(String httpUrl, String param, boolean needReadResponse, ContentType contentType) {
         HttpURLConnection connection = null;
         InputStream is = null;
         OutputStream os = null;
@@ -111,10 +114,15 @@ public class HttpUtils {
             connection.setDoOutput(true);
             // 默认值为：true，当前向远程服务读取数据时，设置为true，该参数可有可无
             connection.setDoInput(true);
-            // 设置传入参数的格式:请求参数应该是 name1=value1&name2=value2 的形式。
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            // 请求参数默认采用application/json
+            if (contentType != null) {
+                connection.setRequestProperty("Content-Type", contentType.getType());
+            } else {
+                connection.setRequestProperty("Content-Type", ContentType.APPLICATION_JSON.getType());
+            }
+            // TODO: 暂时不设置auth
             // 设置鉴权信息：Authorization: Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0
-            connection.setRequestProperty("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
+            // connection.setRequestProperty("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
             // 通过连接对象获取一个输出流
             os = connection.getOutputStream();
             // 通过输出流对象将参数写出去/传输出去,它是通过字节数组写出的
@@ -169,5 +177,30 @@ public class HttpUtils {
             connection.disconnect();
         }
         return result;
+    }
+
+    /**
+     * HTTP中，POST，PUT，DELETE，UPDATE等方法中，
+     * body的内容类型。
+     *
+     * 目前只支持部分类型。足够对应当前的测试
+     */
+    enum ContentType {
+        // 请求参数是JSON格式
+        APPLICATION_JSON("application/json"),
+        // 请求参数应该是 name1=value1&name2=value2 的形式
+        APPLICATION_X_WWW_FORM_URLENCODEED("application/x-www-form-urlencoded"),
+        // 请求参数是XML格式
+        APPLICATION_XML("application/xml");
+
+        private String type;
+
+        ContentType(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
     }
 }

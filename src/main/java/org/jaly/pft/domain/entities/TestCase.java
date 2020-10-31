@@ -1,35 +1,33 @@
 package org.jaly.pft.domain.entities;
 
-import org.jaly.pft.domain.entities.elements.ParameterElement;
-import org.jaly.pft.domain.entities.elements.RequestProtocolElement;
-import org.jaly.pft.domain.entities.elements.RequestTypeElement;
-import org.jaly.pft.domain.entities.elements.URLElement;
+import org.jaly.pft.conf.Configuration;
+
+import java.util.List;
 
 /**
- * 一个测试用例，可以有返回值，也可以没有返回值。
- * 为了统一这2种测试用例，需要用一个"标签"类
+ * 框架中的"测试用例"的概念。
+ * 一次完整的测试
  *
  * @author Jaly
  */
-public interface TestCase {
+public class TestCase {
 
-    String getTestCaseName();
+    /**
+     * 测试用例组相关的配置信息
+     */
+    private Configuration.ThreadGroupConf groupConf;
 
-    void setTestCaseName(String testCaseName);
+    /**
+     * 测试用例组包含的所有测试用例
+     */
+    private List<TestStep> testSteps;
 
-    RequestProtocolElement getProtocol();
-
-    void setProtocol(RequestProtocolElement protocol);
-
-    URLElement getUrl();
-
-    void setUrl(URLElement url);
-
-    RequestTypeElement getMethod();
-
-    void setMethod(RequestTypeElement method);
-
-    ParameterElement getParameters();
-
-    void setParameters(ParameterElement parameters);
+    /**
+     * 初始化测试用例
+     *
+     * @param conf
+     */
+    public TestCase(Configuration.ThreadGroupConf conf) {
+        this.groupConf = conf;
+    }
 }

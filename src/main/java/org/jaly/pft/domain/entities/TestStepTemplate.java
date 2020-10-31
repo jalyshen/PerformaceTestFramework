@@ -1,10 +1,9 @@
 package org.jaly.pft.domain.entities;
 
-import org.jaly.pft.domain.entities.elements.ParameterElement;
-import org.jaly.pft.domain.entities.elements.RequestProtocolElement;
-import org.jaly.pft.domain.entities.elements.RequestTypeElement;
-import org.jaly.pft.domain.entities.elements.RequestTypeElement.RequestType;
-import org.jaly.pft.domain.entities.elements.URLElement;
+import org.jaly.pft.domain.entities.elements.Parameters;
+import org.jaly.pft.domain.entities.elements.Protocol;
+import org.jaly.pft.domain.entities.elements.RequestMethod;
+import org.jaly.pft.domain.entities.elements.URL;
 import org.jaly.pft.domain.events.BaseApiEvent;
 import org.jaly.pft.utils.HttpUtils;
 
@@ -18,18 +17,18 @@ import java.util.Map;
  *
  * @author Jaly
  */
-public abstract class TestCaseTemplate implements Runnable, TestCase {
+public abstract class TestStepTemplate implements TestStep {
 
     // 测试用例名称
-    private String testCaseName;
+    private String testStepName;
     // 测试使用的协议类型
-    private RequestProtocolElement protocol;
+    private Protocol protocol;
     // 测试的API
-    private URLElement url;
+    private URL url;
     // 使用HTTP协议的方法（GET、POST...）
-    private RequestTypeElement method;
+    private RequestMethod method;
     // 输入的参数
-    private ParameterElement parameters;
+    private Parameters parameters;
 
     /**
      * 这个Map用户存储某个TestCase的输出，
@@ -54,7 +53,7 @@ public abstract class TestCaseTemplate implements Runnable, TestCase {
         this.buildingParameters();
         String result = null;
         Timestamp beginTime = new Timestamp(System.currentTimeMillis());
-        if (RequestType.GET == method.getRequestType()) {
+        if (RequestMethod.RequestType.GET == method.getRequestType()) {
             //TODO: 缺少设置URL的参数
             result = HttpUtils.doGet(this.getUrl().getWholeStrUrl(),
                                             false);
@@ -65,7 +64,7 @@ public abstract class TestCaseTemplate implements Runnable, TestCase {
         }
         Timestamp endTime = new Timestamp(System.currentTimeMillis());
         BaseApiEvent event = new BaseApiEvent(beginTime, endTime,
-                                              getTestCaseName(),
+                                              getTestStepName(),
                                               null,
                                               getMethod().getRequestType(),
                                               result);
@@ -81,52 +80,52 @@ public abstract class TestCaseTemplate implements Runnable, TestCase {
     }
 
     @Override
-    public String getTestCaseName() {
-        return testCaseName;
+    public String getTestStepName() {
+        return testStepName;
     }
 
     @Override
-    public void setTestCaseName(String testCaseName) {
-        this.testCaseName = testCaseName;
+    public void setTestStepName(String testStepName) {
+        this.testStepName = testStepName;
     }
 
     @Override
-    public RequestProtocolElement getProtocol() {
+    public Protocol getProtocol() {
         return protocol;
     }
 
     @Override
-    public void setProtocol(RequestProtocolElement protocol) {
+    public void setProtocol(Protocol protocol) {
         this.protocol = protocol;
     }
 
     @Override
-    public URLElement getUrl() {
+    public URL getUrl() {
         return url;
     }
 
     @Override
-    public void setUrl(URLElement url) {
+    public void setUrl(URL url) {
         this.url = url;
     }
 
     @Override
-    public RequestTypeElement getMethod() {
+    public RequestMethod getMethod() {
         return method;
     }
 
     @Override
-    public void setMethod(RequestTypeElement method) {
+    public void setMethod(RequestMethod method) {
         this.method = method;
     }
 
     @Override
-    public ParameterElement getParameters() {
+    public Parameters getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(ParameterElement parameters) {
+    public void setParameters(Parameters parameters) {
         this.parameters = parameters;
     }
 

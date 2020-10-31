@@ -5,31 +5,31 @@ package org.jaly.pft.domain.entities.elements;
  *
  * @author Jaly
  */
-public class RequestProtocolElement extends ConfigurationElement{
+public class Protocol extends ConfigurationElement{
 
-    private Protocol protocol;
+    private ProtocolType protocolType;
 
-    public RequestProtocolElement() {
+    public Protocol() {
         elementType = ElementType.PROTOCOL;
     }
 
-    public RequestProtocolElement(Protocol protocol) {
+    public Protocol(ProtocolType protocol) {
         this(); // 设置配置元件类型
         this.setProtocol(protocol);
     }
 
-    public Protocol getProtocol() {
-        return protocol;
+    public ProtocolType getProtocol() {
+        return protocolType;
     }
 
-    public void setProtocol(Protocol protocol) {
-        this.protocol = protocol;
+    public void setProtocol(ProtocolType protocol) {
+        this.protocolType = protocol;
     }
 
     /**
      * 定义请求协议类型
      */
-    enum Protocol{
+    enum ProtocolType {
         HTTP, HTTPS, TCP, UDP;
     }
 }
