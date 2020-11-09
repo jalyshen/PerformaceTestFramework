@@ -1,5 +1,6 @@
 package org.jaly.pft.conf;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,32 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 测试用例的配置信息。
- * 对应配置文件是TestCasePlan.json
+ * 测试用例的配置信息。 对应配置文件是TestCasePlan.json
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TestCasePlan {
 
-    @JsonInclude(Include.ALWAYS)
     private CommonPart commonPart;
-
-    private static Map<String, Api> apis = new Hashtable<>();
-
-    private static String commonURL = "";
+    private static Map<String, Api> apiMap = new Hashtable<>();
 
     /**
-     * 对于json，应该是映射为list，
-     * 但是系统需要map。内部需要转成map
-     * 对外，请参考属性apis
+     * 对于json，应该是映射为list， 但是系统需要map。内部需要转成map 对外，请参考属性apis
      */
-    @JsonInclude(Include.ALWAYS)
-    @JsonProperty(value = "apis")
-    private List<Api> innerApis;
+    private List<Api> apis;
 
     /**
-     * 设置通用的URL，组合host，port和services
-     * sample: localhost:9000/marketplace
-     * 通讯的协议，通过api的属性来设置
+     * 设置通用的URL，组合host，port和services sample: localhost:9000/marketplace 通讯的协议，通过api的属性来设置
+     *
      * @return
      */
     public String getCommonURL() {
@@ -45,77 +37,107 @@ public class TestCasePlan {
             StringBuffer stringBuffer = new StringBuffer(commonPart.getHost());
             stringBuffer.append(":").append(commonPart.getPort())
                         .append("/").append(commonPart.service);
-            commonURL = stringBuffer.toString();
+            return stringBuffer.toString();
         }
-        return commonURL;
+        return null;
+    }
+
+    public CommonPart getCommonPart() {
+        return this.commonPart;
     }
 
     /**
      * 对外暴露
+     *
      * @return
      */
     public Map<String, Api> getApis() {
-        if (!innerApis.isEmpty()) {
-            innerApis.forEach(api -> {
-                apis.put(api.getApiName(), api);
+        if (!apis.isEmpty()) {
+            apis.forEach(api -> {
+                apiMap.put(api.getApiName(), api);
             });
         }
-        return apis;
+        return apiMap;
     }
 
     /**
      * 各个TestCase公共部分的配置信息
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public class CommonPart {
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class CommonPart {
+        @JsonProperty(value = "host")
         private String host; // 服务所在的ip或者服务器名字
-        private String port = "80"; // 服务的端口号，默认80
+        @JsonProperty(value = "port")
+        private Integer port = 80; // 服务的端口号，默认80
+        @JsonProperty(value = "service")
         private String service; // 服务名称
 
-        CommonPart(String host, String port, String service) {
-            this.host = host;
-            this.port = port;
-            this.service = service;
+        public CommonPart() {
         }
 
         public String getService() {
             return service;
         }
 
+        public void setService(String service) {
+            this.service = service;
+        }
+
         public String getHost() {
             return host;
         }
 
-        public String getPort() {
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public Integer getPort() {
             return port;
         }
 
+        public void setPort(Integer port) {
+            this.port = port;
+        }
+
         /**
-         * 判断是否设置了基础的参数
-         * 对Port不判断，因为如果port没有设置，默认提供80。
+         * 判断是否设置了基础的参数 对Port不判断，因为如果port没有设置，默认提供80。
+         *
          * @return
          */
         public boolean isEmpty() {
-            if (getHost() == null || getHost().isEmpty()) return false;
-            if (getService() == null || getService().isEmpty()) return false;
-            return true;
+            if (getHost() == null || getHost().isEmpty()) {
+                return true;
+            }
+            if (getService() == null || getService().isEmpty()) {
+                return true;
+            }
+            return false;
         }
     }
 
     /**
-     * 每个API对应的配置信息
-     * 如果某个属性没有设置，系统会忽略
+     * 每个API对应的配置信息 如果某个属性没有设置，系统会忽略
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public class Api {
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Api {
+        @JsonProperty(value = "apiName")
         private String apiName;
+        @JsonProperty(value = "protocol")
         private String protocol;
+        @JsonProperty(value = "method")
         private String method;
+        @JsonProperty(value = "contextType")
         private String contextType; // 这个字段可以不设置，注意null检测
         @JsonInclude(Include.ALWAYS)
+        @JsonProperty(value = "path")
         private String path; // 必须要的，具体API的访问路径
         @JsonProperty(value = "parameters")
         private Map<String, String> parameters; // 这个字段可以不设置，注意null检测
+
+        public Api() {
+        }
 
         public String getApiName() {
             return apiName;
@@ -168,14 +190,17 @@ public class TestCasePlan {
 
     /**
      * 测试
+     *
      * @param args
      */
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
         TestCasePlan tcp;
         try {
-            tcp = mapper.readValue(new File("TestCasePlan.json"), TestCasePlan.class);
-            System.out.println("sss");
+            tcp = mapper.readValue(
+                    new File("/Users/jaly/Projects/PerformanceTestFramework/src/main/resources/TestCasePlan.json"),
+                    TestCasePlan.class);
+            System.out.println("common url -> " + tcp.getCommonURL());
         } catch (IOException e) {
             e.printStackTrace();
         }

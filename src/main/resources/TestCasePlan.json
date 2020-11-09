@@ -1,8 +1,8 @@
 {
   "commonPart": {
-    "hosts": "localhost",
-    "ports": 9000,
-    "services": "marketplace"
+    "host": "localhost",
+    "port": 9000,
+    "service": "marketplace"
   },
   "apis": [
     {
