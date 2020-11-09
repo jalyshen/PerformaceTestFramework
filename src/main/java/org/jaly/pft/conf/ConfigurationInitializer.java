@@ -29,6 +29,10 @@ public class ConfigurationInitializer {
         readConfigurationFile(inputStream);
     }
 
+    /**
+     * 指定配置文件路径
+     * @param configurationFile
+     */
     public static void injectingConfigurationValues(String configurationFile) {
         if (configurationFile != null && !configurationFile.isEmpty()) {
             File confFile = new File(configurationFile);

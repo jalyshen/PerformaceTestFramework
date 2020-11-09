@@ -15,6 +15,6 @@ public class PerformanceTesterLauncher {
      */
     public static void main(String[] args) {
         ConfigurationInitializer.injectingConfigurationValues();
-        System.out.println("max -> " + ConfigurationInitializer.getConfiguration().getUsers().getMax());
+        System.out.println("max -> " + ConfigurationInitializer.getConfiguration().getMax());
     }
 }

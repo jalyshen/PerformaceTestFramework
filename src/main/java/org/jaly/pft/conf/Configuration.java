@@ -9,40 +9,48 @@ package org.jaly.pft.conf;
  * @author Jaly
  */
 public class Configuration {
-    private ThreadGroupConf threadGroupConf;
+    private TestUsersConf testUsersConf;
     private Behavior behavior;
 
-    Configuration() {}
+    public Configuration() {}
 
-    Configuration(ThreadGroupConf threadGroupConf, Behavior behavior) {
-        this.threadGroupConf = threadGroupConf;
+    public Configuration(TestUsersConf testUsersConf, Behavior behavior) {
+        this.testUsersConf = testUsersConf;
         this.behavior = behavior;
     }
 
-    public void setUsers(ThreadGroupConf threadGroupConf) {
-        this.threadGroupConf = threadGroupConf;
+    public int getRampUpPeriod() {
+        return behavior.getRampUpPeriod();
     }
 
-    public ThreadGroupConf getUsers() {
-        return this.threadGroupConf;
+    public int getLoopCount() {
+        return behavior.getLoopCount();
     }
 
-    public void setBehavior(Behavior behavior) {
-        this.behavior = behavior;
+    public int getTimers() {
+        return behavior.getTimers();
     }
 
-    public Behavior getBehavior() {
-        return this.behavior;
+    public int getMax() {
+        return testUsersConf.getMax();
+    }
+
+    public int getInit() {
+        return testUsersConf.getInit();
+    }
+
+    public int getIncrease() {
+        return testUsersConf.getIncrease();
     }
 
     /**
      * 线程（Test case）执行过程中的行为
-     *
+     * 对应到configuration中的"behavior"段
      * 这个配置是全局性的，针对整个测试框架
      *
      * @author Jaly
      */
-    public class Behavior {
+    class Behavior {
         /**
          * 指定了启动所有用户（线程）所花费的时间，单位是秒，
          * 默认时间是1秒。如果需要立即启动所有用户（线程），将此设定为0即可
@@ -69,39 +77,39 @@ public class Configuration {
             this.timers = timers;
         }
 
-        public void setRampUpPeriod(int rampUpPeriod) {
+        void setRampUpPeriod(int rampUpPeriod) {
             this.rampUpPeriod  = rampUpPeriod;
         }
 
-        public void setLoopCount(int loopCount) {
+        void setLoopCount(int loopCount) {
             this.loopCount = loopCount;
         }
 
-        public void setTimers(int timers) {
+        void setTimers(int timers) {
             this.timers = timers;
         }
 
-        public int getRampUpPeriod() {
+        int getRampUpPeriod() {
             return rampUpPeriod;
         }
 
-        public int getLoopCount() {
+        int getLoopCount() {
             return loopCount;
         }
 
-        public int getTimers() {
+        int getTimers() {
             return timers;
         }
     }
 
     /**
-     * 线程组（用户）相关设置
-     *
+     * 测试用例相关设置
+     * 对应configuration配置文件中的"users"段
      * 这个配置是全局性的，针对整个测试框架
      *
      * @author Jaly
      */
-    public class ThreadGroupConf {
+    class TestUsersConf {
         /**
          * 设置同时请求的最大线程（用户）数量
          */
@@ -117,35 +125,35 @@ public class Configuration {
          */
         private int increase;
 
-        ThreadGroupConf() {}
+        TestUsersConf() {}
 
-        ThreadGroupConf(int max, int init, int increase) {
+        TestUsersConf(int max, int init, int increase) {
             this.max  = max;
             this.init = init;
             this.increase  = increase;
         }
 
-        public void setMax(int max) {
+        void setMax(int max) {
             this.max  = max;
         }
 
-        public void setInit(int init) {
+        void setInit(int init) {
             this.init = init;
         }
 
-        public void setIncrease(int increase) {
+        void setIncrease(int increase) {
             this.increase = increase;
         }
 
-        public int getMax() {
+        int getMax() {
             return max;
         }
 
-        public int getInit() {
+        int getInit() {
             return init;
         }
 
-        public int getIncrease() {
+        int getIncrease() {
             return increase;
         }
     }

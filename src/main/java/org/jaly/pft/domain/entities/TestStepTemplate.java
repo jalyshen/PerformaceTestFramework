@@ -47,6 +47,10 @@ public abstract class TestStepTemplate implements TestStep {
      */
     public abstract void buildingParameters();
 
+    /**
+     * 这个是thread的方法。
+     * 通过Thread的start()方法来唤起每个测试步骤（TestStep）
+     */
     @Override
     public void run() {
         // 构建输入参数
