@@ -21,11 +21,7 @@ public class TestCasePlan {
 
     private CommonPart commonPart;
     private static Map<String, Api> apiMap = new Hashtable<>();
-
-    /**
-     * 对于json，应该是映射为list， 但是系统需要map。内部需要转成map 对外，请参考属性apis
-     */
-    private List<Api> apis;
+    private Plan plan;
 
     /**
      * 设置通用的URL，组合host，port和services sample: localhost:9000/marketplace 通讯的协议，通过api的属性来设置
@@ -52,8 +48,8 @@ public class TestCasePlan {
      * @return
      */
     public Map<String, Api> getApis() {
-        if (!apis.isEmpty()) {
-            apis.forEach(api -> {
+        if (!plan.apis.isEmpty()) {
+            plan.apis.forEach(api -> {
                 apiMap.put(api.getApiName(), api);
             });
         }
@@ -117,6 +113,19 @@ public class TestCasePlan {
     }
 
     /**
+     * 测试计划部分
+     */
+    @JsonInclude(Include.NON_NULL)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Plan{
+        private boolean isCombination;
+        /**
+         * 对于json，应该是映射为list， 但是系统需要map。内部需要转成map 对外，请参考属性apis
+         */
+        private List<Api> apis;
+    }
+
+    /**
      * 每个API对应的配置信息 如果某个属性没有设置，系统会忽略
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -135,6 +144,8 @@ public class TestCasePlan {
         private String path; // 必须要的，具体API的访问路径
         @JsonProperty(value = "parameters")
         private Map<String, String> parameters; // 这个字段可以不设置，注意null检测
+        @JsonProperty(value = "order")
+        private Integer order; // api的执行顺序
 
         public Api() {
         }
@@ -185,6 +196,14 @@ public class TestCasePlan {
 
         public void setParameters(Map<String, String> parameters) {
             this.parameters = parameters;
+        }
+
+        public Integer getOrder() {
+            return order;
+        }
+
+        public void setOrder(Integer order) {
+            this.order = order;
         }
     }
 

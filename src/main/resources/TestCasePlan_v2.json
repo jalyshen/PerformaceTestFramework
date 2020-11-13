@@ -1,0 +1,32 @@
+{
+  "commonPart": {
+    "host": "localhost",
+    "port": 9000,
+    "service": "marketplace"
+  },
+  "plan": {
+    "isCombination": true,
+    "apis": [
+      {
+        "apiName": "Get_All_users",
+        "protocol": "HTTP",
+        "method": "get",
+        "contextType": "application/json",
+        "path": "/users",
+        "order": 1
+      },
+      {
+        "apiName": "Get_One_User",
+        "protocol": "HTTP",
+        "method": "get",
+        "contextType": "application/json",
+        "path": "/users/{param1}",
+        "parameters": {
+          "param1": "aaa",
+          "param2": "bbb"
+        },
+        "order": 2
+      }
+    ]
+  }
+}
