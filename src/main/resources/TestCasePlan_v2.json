@@ -8,22 +8,28 @@
     "isCombination": true,
     "apis": [
       {
-        "apiName": "Get_All_users",
+        "apiName": "login",
         "protocol": "HTTP",
-        "method": "get",
+        "method": "post",
         "contextType": "application/json",
-        "path": "/users",
+        "path": "/users/login",
+        "parameters": {
+          "username": "aaa",
+          "password": "bbb"
+        },
         "order": 1
       },
       {
-        "apiName": "Get_One_User",
+        "apiName": "getUserOrder",
         "protocol": "HTTP",
         "method": "get",
         "contextType": "application/json",
-        "path": "/users/{param1}",
+        "path": "/orders/{user_id}",
         "parameters": {
-          "param1": "aaa",
-          "param2": "bbb"
+          "user_id": {
+            "ref": "login",
+            "value": "user_id"
+          }
         },
         "order": 2
       }
